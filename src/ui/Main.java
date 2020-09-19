@@ -4,7 +4,13 @@ import java.util.ArrayList;
 import model.*;
 
 public class Main{
-	
+	/**
+	* Allows the user to set the number of elements needed for the construction <br>
+	* Pre: <br>
+	* Post: The number of elements has been stored <br>
+	* @param sc Scanner used to ask the user for the information sc != null
+	* @return materialsAmount The number of elements. Returns an integer
+	*/
 	public static int setMaterialsAmount(Scanner sc){
 		
 		System.out.println("Ingrese la cantidad de materiales que va a usar:");
@@ -12,7 +18,15 @@ public class Main{
 		sc.nextLine();
 		return materialsAmount;
 	}
-	
+	/**
+	* Allows the user to set the name of a specific material <br>
+	* Pre: The list of materials has been initialized <br>
+	* Post: The name of each material has been stored <br>
+	* @param materialsName Array used to store the name of each material materialsName != null
+	* @param i Value used to access an specific index of the array i != null
+	* @param sc Scanner used to ask the user for the information sc != null
+	* @return materialsName The names of the materials.
+	*/
 	public static String[] setMaterialsName(String[] materialsName, int i, Scanner sc){
 		
 		System.out.println("Ingrese el nombre del material numero " + (i+1) + ":");
@@ -20,30 +34,45 @@ public class Main{
 		return materialsName;
 		
 	}
-	
+	/**
+	* Allows the user to set the price of a specific material <br>
+	* Pre: The list of prices for the materials has been initialized <br>
+	* Post: The price of the material in the selected store has been stored <br>
+	* @param store Used to select the store
+	* @param materialsPrice Array used to store the price of the material materialsPrice != null
+	* @param i Value used to access an specific index of the array i != null
+	* @param sc Scanner used to ask the user for the information sc != null
+	* @return materialsPrice The list with the added price for that material
+	*/
 	public static int[] setPrice(String store, int[] materialsPrice, int i, Scanner sc){
 		
 		if (store.equalsIgnoreCase("Homecenter")){
 			
 			System.out.println("Ingrese el precio del material " + (i+1) + " en Homecenter:");
-			materialsPrice[i] = sc.nextInt();
 			
 		}else if (store.equalsIgnoreCase("FerreteriaCentro")){
 			
 			System.out.println("Ingrese el precio del material " + (i+1) + " en la ferreteria del centro:");
-			materialsPrice[i] = sc.nextInt();
 			
 		}else if (store.equalsIgnoreCase("FerreteriaBarrio")){
 			
 			System.out.println("Ingrese el precio del material " + (i+1) + " en la ferreteria del barrio:");
-			materialsPrice[i] = sc.nextInt();
 			
 		}
 		
+		materialsPrice[i] = sc.nextInt();
 		return materialsPrice;
 		
 	}
-	
+	/**
+	* Allows the user to set the quantity of a specific material <br>
+	* Pre: The list of quantities for the materials has been initialized <br>
+	* Post: The needed quantity of the material has been stored <br>
+	* @param materialsQuantity Array used to store the needed quantity of the material materialsQuantity != null
+	* @param i Value used to access an specific index of the array i != null
+	* @param sc Scanner used to ask the user for the information sc != null
+	* @return materialsQuantity The list with the added quantity for that material
+	*/
 	public static int[] setMaterialsQuantity(int[] materialsQuantity, int i, Scanner sc){
 		
 		System.out.println("Ingrese la cantidad del material numero " + (i+1) + ":");
@@ -51,7 +80,15 @@ public class Main{
 		return materialsQuantity;
 		
 	}
-	
+	/**
+	* Allows the user to set the type of a specific material <br>
+	* Pre: The list of types for the materials has been initialized <br>
+	* Post: The type of the material has been stored <br>
+	* @param materialsType Array used to store the type of the material materialsType != null
+	* @param i Value used to access an specific index of the array i != null
+	* @param sc Scanner used to ask the user for the information sc != null
+	* @return materialsType The list with the added type for that material
+	*/
 	public static String[] setMaterialsType(String[] materialsType, int i, Scanner sc){
 		
 		System.out.println("Ingrese el tipo del material numero " + (i+1) + ":");
@@ -59,7 +96,13 @@ public class Main{
 		return materialsType;
 		
 	}
-	
+	/**
+	* Allows the user to set their location <br>
+	* Pre: <br>
+	* Post: The user's location has been stored <br>
+	* @param sc Scanner used to ask the user for the information sc != null
+	* @return location The location of the user. Returns a String location.equalsIgnoreCase("Norte" || "Centro" || "Sur")
+	*/
 	public static String setLocation(Scanner sc){
 		
 		System.out.println("Ingrese la ubicacion inmueble:");
@@ -67,7 +110,19 @@ public class Main{
 		return location;
 		
 	}
-	
+	/**
+	* Shows the cheapest price for each material and calculates the total based on them <br>
+	* Pre: The list of names, prices and quantities already have values. Same with materialsAmount and location <br>
+	* Post: The cheapest price for each material and the total based on them <br>
+	* @param materialsName Array used to print the name of each material materialsName != null
+	* @param materialsPriceHC Array used to calculate the cheapest price materialsPriceHC != null
+	* @param materialsPriceFC Array used to calculate the cheapest price materialsPriceFC != null
+	* @param materialsPriceFB Array used to calculate the cheapest price materialsPriceFB != null
+	* @param materialsQuantity The list with the required quantity of each material materialsQuantity != null
+	* @param materialsAmount The number of elements needed 
+	* @param location Location of the user location.equalsIgnoreCase("Norte" || "Centro" || "Sur")
+	* @return result The total based on the cheapest prices. Returns an integer
+	*/
 	public static int showBestPrices(String[] materialsName, int[] materialsPriceHC, int[] materialsPriceFC, int[] materialsPriceFB, int[] materialsQuantity, int materialsAmount, String location){
 		
 		ArrayList<Integer> bestPrice = Budget.bestPrice(materialsPriceHC, materialsPriceFC, materialsPriceFB, materialsQuantity, materialsAmount);
@@ -98,7 +153,15 @@ public class Main{
 		return result;
 		
 	}
-	
+	/**
+	* Shows materials based on their type <br>
+	* Pre: The list of names and types already have values. Same with materialsAmount. <br>
+	* Post: Shows the user a list of materials based on their type/use <br>
+	* @param materialsName Array used in the materialsType method != null
+	* @param materialsType Array used to get the material's type materialsName != null
+	* @param type Value used in the materialsType method type.equalsIgnoreCase("Obra blanca" || "Obra negra" || "Pintura")
+	* @param materialsAmount The number of elements needed 
+	*/
 	public static void showMaterialsType (String[] materialsName, String[] materialsType, String type, int materialsAmount){
 		
 		ArrayList<String> result = Budget.materialsType(materialsName, materialsType, type, materialsAmount);

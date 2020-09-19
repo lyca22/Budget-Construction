@@ -1,1 +1,1 @@
-cmd %cd% /c javac -cp src src/ui/Main.java -d bin & java -cp bin ui.Main & pause
+cmd %cd% /c javadoc -d docs -use src/model/*.java src/ui/*.java & javac -cp src src/ui/Main.java -d bin & java -cp bin ui.Main & pause
